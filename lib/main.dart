@@ -177,6 +177,10 @@ class MainAppState extends State<MainApp> with SimpleFrameAppState {
 
         // send current text to Frame
         String wrappedText = TextUtils.wrapText(text, 640, 4).join('\n');
+
+        // extra character replacements just for Turkish
+        wrappedText = wrappedText.replaceAll('ğ', 'g').replaceAll('ş', 's');
+
         await frame!.sendMessage(TxPlainText(msgCode: 0x0b, text: wrappedText));
 
         // update the phone UI too
