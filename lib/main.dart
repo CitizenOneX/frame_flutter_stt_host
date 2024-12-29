@@ -205,11 +205,11 @@ class MainAppState extends State<MainApp> with SimpleFrameAppState {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Speech-to-Text',
+      title: 'TR Speech-to-Text',
       theme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Frame Speech-to-Text"),
+          title: const Text("TR Speech-to-Text"),
           actions: [getBatteryWidget()]
         ),
         body: Center(

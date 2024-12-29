@@ -16,7 +16,7 @@
     <!-- legacy for Android 9 or lower -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="28" />
     <application
-        android:label="Speech-To-Text (Host)"
+        android:label="TR Speech-To-Text"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
