@@ -33,7 +33,7 @@ class MainAppState extends State<MainApp> with SimpleFrameAppState {
   }
 
   /// speech to text application members
-  static const _modelName = 'vosk-model-small-en-us-0.15.zip';
+  static const _modelName = 'vosk-model-small-tr-0.3.zip';
   final _vosk = VoskFlutterPlugin.instance();
   late final Model _model;
   late final Recognizer _recognizer;
@@ -48,7 +48,7 @@ class MainAppState extends State<MainApp> with SimpleFrameAppState {
     super.initState();
     currentState = ApplicationState.initializing;
     // asynchronously kick off Vosk initialization
-    _initVosk();
+    _initVosk().then((dynamic) => tryScanAndConnectAndStart(andRun: true));
   }
 
   @override
@@ -58,7 +58,7 @@ class MainAppState extends State<MainApp> with SimpleFrameAppState {
     super.dispose();
   }
 
-  void _initVosk() async {
+  Future<void> _initVosk() async {
     final enSmallModelPath = await ModelLoader().loadFromAssets('assets/$_modelName');
     _model = await _vosk.createModel(enSmallModelPath);
     _recognizer = await _vosk.createRecognizer(model: _model, sampleRate: _sampleRate);
@@ -176,7 +176,7 @@ class MainAppState extends State<MainApp> with SimpleFrameAppState {
         }
 
         // send current text to Frame
-        String wrappedText = TextUtils.wrapText(text, 640, 4);
+        String wrappedText = TextUtils.wrapText(text, 640, 4).join('\n');
         await frame!.sendMessage(TxPlainText(msgCode: 0x0b, text: wrappedText));
 
         // update the phone UI too
